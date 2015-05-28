@@ -56,14 +56,7 @@ def alert(message):
 def notification(message, timeout=7000):
   xbmc.executebuiltin((u'XBMC.Notification("%s", "%s", %s)' % ('VietMedia', message, timeout)).encode("utf-8"))
 
-def extract(key, enc):
-    dec = []
-    enc = base64.urlsafe_b64decode(enc)
-    for i in range(len(enc)):
-        key_c = key[i % len(key)]
-        dec_c = chr((256 + ord(enc[i]) - ord(key_c)) % 256)
-        dec.append(dec_c)
-    return "".join(dec)
+
 
 def add_item(name,url,mode,iconimage,query='',type='f',plot='',page=0,playable=False):
   u=sys.argv[0]+"?url="+urllib.quote_plus(url)+"&mode="+str(mode)+"&query="+str(query)+"&type="+str(type)+"&page="+str(page)
@@ -149,21 +142,7 @@ def get_visitor():
 
   return visitor
 
-def get_params():
-  param=[]
-  paramstring=sys.argv[2]
-  if len(paramstring)>=2:
-      params=sys.argv[2]
-      cleanedparams=params.replace('?','')
-      if (params[len(params)-1]=='/'):
-          params=params[0:len(params)-2]
-      pairsofparams=cleanedparams.split('&')
-      param={}
-      for i in range(len(pairsofparams)):
-          splitparams={}
-          splitparams=pairsofparams[i].split('=')
-          if (len(splitparams))==2:
-              param[splitparams[0]]=splitparams[1]
+
 
   return param
 
